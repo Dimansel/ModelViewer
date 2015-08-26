@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="projection3d">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../Projection3D/out/artifacts/projection3d/projection3d.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

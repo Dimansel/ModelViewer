@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="ModelViewer">
+    <output-path>$PROJECT_DIR$/out/artifacts/ModelViewer</output-path>
+    <root id="archive" name="ModelViewer.jar">
+      <element id="module-output" name="ModelViewer" />
+      <element id="library" level="project" name="projection3d" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
