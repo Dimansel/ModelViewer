@@ -8,8 +8,8 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
 public class MainWindow extends JFrame implements KeyEventDispatcher, ActionListener {
-    public final int WIDTH = 550;
-    public final int HEIGHT = 550;
+    public final int WIDTH = 800;
+    public final int HEIGHT = 800;
 
     public Screen screen;
     private Robot robot;
@@ -19,7 +19,7 @@ public class MainWindow extends JFrame implements KeyEventDispatcher, ActionList
 
     public MainWindow() {
         //INITIALIZATION
-        screen = new Screen(WIDTH, HEIGHT);
+        screen = new Screen(800, 800);
         lastFPS = System.currentTimeMillis();
 
         //ADDING LISTENERS
@@ -99,16 +99,9 @@ public class MainWindow extends JFrame implements KeyEventDispatcher, ActionList
     public boolean dispatchKeyEvent(KeyEvent e) {
         if (e.getID() == KeyEvent.KEY_PRESSED) {
             Keyboard.addKey(e.getKeyCode());
-
-            //grab or release mouse
             if (e.getKeyCode() == KeyEvent.VK_G) {
                 grabMouse();
                 setCursor();
-            }
-
-            //enable or disable gouraud shading
-            if (e.getKeyCode() == KeyEvent.VK_F) {
-                screen.setShadingMode();
             }
         }
         if (e.getID() == KeyEvent.KEY_RELEASED) Keyboard.removeKey(e.getKeyCode());
