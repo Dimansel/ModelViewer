@@ -29,18 +29,23 @@ public class Screen extends JPanel {
 
     private void init() {
         models = new ArrayList<>();
-        cam = new Camera(width, height, 70, 0, 100);
+        cam = new Camera(width, height, 70, 0.1, 100);
 
-        Model model1 = OBJModelLoader.load("C:\\Users\\freak\\Desktop\\Models\\suzanne.obj", 1);
-        model1.color = new Color(255, 255, 255);
+        Model model1 = OBJModelLoader.load("D:\\JetBrains\\Models\\suzanne.obj", 1);
+        model1.color = new Color(35, 255, 0);
         model1.position = new Vertex3D(0, 0, 5);
-        //model1.gouraudShading = true;
         models.add(model1);
     }
 
     protected void projectVertices() {
         for (Model m : models) {
             m.projectVertices(cam, cam.pos);
+        }
+    }
+
+    protected void setShadingMode() {
+        for (Model m : models) {
+            m.gouraudShading = !m.gouraudShading;
         }
     }
 
