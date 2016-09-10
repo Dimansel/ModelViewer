@@ -12,6 +12,7 @@ import java.awt.image.DataBufferInt;
 import java.util.Arrays;
 import java.util.ArrayList;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class Screen extends JPanel {
     protected Camera cam;
     protected ArrayList<Model> models;
@@ -31,11 +32,17 @@ public class Screen extends JPanel {
         models = new ArrayList<>();
         cam = new Camera(width, height, 70, 0, 100);
 
-        Model model1 = OBJModelLoader.load("C:\\Users\\freak\\Desktop\\Models\\suzanne.obj", 1);
+        Model model1 = OBJModelLoader.load("D:\\3DsoftRenderer\\Models\\lp_torus.obj", 1);
         model1.color = new Color(255, 255, 255);
         model1.position = new Vertex3D(0, 0, 5);
         //model1.gouraudShading = true;
         models.add(model1);
+    }
+
+    protected void switchShading() {
+        for (Model m : models) {
+            m.gouraudShading = !m.gouraudShading;
+        }
     }
 
     protected void projectVertices() {

@@ -8,18 +8,18 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
 public class MainWindow extends JFrame implements KeyEventDispatcher, ActionListener {
-    public final int WIDTH = 800;
-    public final int HEIGHT = 800;
+    private final int WIDTH = 1200;
+    private final int HEIGHT = 700;
 
-    public Screen screen;
+    private Screen screen;
     private Robot robot;
     private Point prevPoint = new Point(); //storing previous mouse position
     private long lastFPS;
     private int fps;
 
-    public MainWindow() {
+    private MainWindow() {
         //INITIALIZATION
-        screen = new Screen(800, 800);
+        screen = new Screen(WIDTH, HEIGHT);
         lastFPS = System.currentTimeMillis();
 
         //ADDING LISTENERS
@@ -103,6 +103,8 @@ public class MainWindow extends JFrame implements KeyEventDispatcher, ActionList
                 grabMouse();
                 setCursor();
             }
+            if (e.getKeyCode() == KeyEvent.VK_F)
+                screen.switchShading();
         }
         if (e.getID() == KeyEvent.KEY_RELEASED) Keyboard.removeKey(e.getKeyCode());
 
