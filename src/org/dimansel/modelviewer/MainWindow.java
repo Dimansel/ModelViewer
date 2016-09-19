@@ -103,8 +103,6 @@ public class MainWindow extends JFrame implements KeyEventDispatcher, ActionList
                 grabMouse();
                 setCursor();
             }
-            if (e.getKeyCode() == KeyEvent.VK_F)
-                screen.switchShading();
         }
         if (e.getID() == KeyEvent.KEY_RELEASED) Keyboard.removeKey(e.getKeyCode());
 
