@@ -30,8 +30,8 @@ public class Screen extends JPanel {
         models = new ArrayList<>();
         cam = new Camera(width, height, 70, 0, 100);
 
-        IShader shader = new GouraudShader(new Color(255, 255, 255));
-        Model model1 = OBJModelLoader.load("D:\\3DsoftRenderer\\Models\\glock.obj", shader, 1);
+        IShader shader = new PhongShader(new Color(255, 255, 255));
+        Model model1 = OBJModelLoader.load("D:\\3DsoftRenderer\\Models\\glock.obj", shader);
         model1.position = new Vertex3D(0, 0, 5);
         models.add(model1);
     }
