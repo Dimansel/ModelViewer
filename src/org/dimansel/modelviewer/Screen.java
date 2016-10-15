@@ -8,16 +8,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.*;
 import java.util.Arrays;
-import java.util.ArrayList;
 
-public class Screen extends JPanel {
-    protected Camera cam;
-    protected ArrayList<Model> models;
+class Screen extends JPanel {
+    Camera cam;
+    private Model model;
     private int width, height;
-    protected boolean mouseGrabbed = false;
+    boolean mouseGrabbed = false;
 
-    public Screen(int width, int height) {
+    Screen(int width, int height) {
         setSize(width, height);
         setBackground(Color.BLACK);
         this.width = width;
@@ -27,19 +27,27 @@ public class Screen extends JPanel {
     }
 
     private void init() {
-        models = new ArrayList<>();
         cam = new Camera(width, height, 70, 0, 100);
+        IShader shader = new PhongShader(new Color(128, 142, 255));
 
-        IShader shader = new PhongShader(new Color(255, 255, 255));
-        Model model1 = OBJModelLoader.load("D:\\3DsoftRenderer\\Models\\glock.obj", shader);
-        model1.position = new Vertex3D(0, 0, 5);
-        models.add(model1);
+        Reader reader;
+        try {
+            reader = new FileReader(MainWindow.path);
+        } catch (FileNotFoundException e) {
+            System.out.println("No path is specified or it's not found. Loading default model...");
+            reader = new InputStreamReader(getClass().getResourceAsStream("wt_teapot.obj"));
+        }
+
+        model = OBJModelLoader.load(reader, shader);
+        if (model == null) {
+            System.out.print("Invalid file!");
+            System.exit(1);
+        }
+        model.position = new Vertex3D(0, 0, 5);
     }
 
-    protected void projectVertices() {
-        for (Model m : models) {
-            m.projectVertices(cam, cam.pos);
-        }
+    void projectVertices() {
+        model.projectVertices(cam, cam.pos);
     }
 
     private void renderModels(Graphics g) {
@@ -47,10 +55,7 @@ public class Screen extends JPanel {
         int[] data = ((DataBufferInt)frameBuffer.getRaster().getDataBuffer()).getData();
         double[] zbuffer = new double[width*height];
         Arrays.fill(zbuffer, 100);
-
-        for (Model m : models) {
-            m.Render(data, zbuffer, width);
-        }
+        model.Render(data, zbuffer, width);
 
         g.drawImage(frameBuffer, 0, 0, this);
     }

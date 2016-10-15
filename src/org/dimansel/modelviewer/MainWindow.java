@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 public class MainWindow extends JFrame implements KeyEventDispatcher, ActionListener {
     private final int WIDTH = 1200;
     private final int HEIGHT = 700;
+    public static String path = "";
 
     private Screen screen;
     private Robot robot;
@@ -118,6 +119,7 @@ public class MainWindow extends JFrame implements KeyEventDispatcher, ActionList
     }
 
     public static void main(String[] args) {
+        if (args.length != 0) path = args[0];
         new MainWindow();
     }
 }
